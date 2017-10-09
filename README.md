@@ -1,30 +1,15 @@
-<<<<<<< HEAD
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+This is hybrid app written in ionic3 and firebase technology.
 
-## How to use this template
+1.this app is based on youtube api's
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+2.you can wacth the top rated playlists,videos based on the genre
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
+3.even you can add your own playlist and then can watch all the videos under that playlists
 
-### With the Ionic CLI:
+screenshots
 
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myTabs tabs
-```
-
-Then, to run it, cd into `myTabs` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
-=======
-# ionic-youtube-favourite-app
->>>>>>> 6cdcc48c4fce2e5e54b9efe37f11f02c86a4e1d8
+![Alt text](/screenshots/1.png?raw=true "Home")
+![Alt text](/screenshots/2.png?raw=true "Optional Title")
+![Alt text](/screenshots/2.png?raw=true "Optional Title")
+![Alt text](/screenshots/2.png?raw=true "Optional Title")
+![Alt text](/screenshots/2.png?raw=true "Optional Title")
