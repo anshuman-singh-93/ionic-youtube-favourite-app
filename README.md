@@ -10,7 +10,15 @@ This is hybrid app written in ionic3 and firebase technology.
 
 5.notification will be sent to you for your favourite genre,once a new top rated playlist under that genre will be added by our team.so you will never miss the chance to watch 
 
-screenshots
+
+**RUN-**
+step 1. git clone https://github.com/anshuman-singh-93/ionic-youtube-favourite-app.git
+
+step 2. cd into root directory and run npm install
+
+step 3. run ionic serve --lab
+
+**screenshots**
 
 ![Alt text](/screenshots/1.png?raw=true "Home")
 ![Alt text](/screenshots/2.png?raw=true "Optional Title")
