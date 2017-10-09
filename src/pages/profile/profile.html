@@ -1,0 +1,38 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>Profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list text-center *ngIf="!isAuthenticated">
+    <ion-list-header>You need to login first</ion-list-header>
+    <ion-item>
+      <button ion-button block (click)="goToLoginPage()">LOGIN</button>
+    </ion-item>
+  </ion-list>
+
+
+  <ion-row *ngIf="isAuthenticated">
+    <ion-item text-center no-lines>
+      <img [src]="user?.photoURL||defaultURL"  class="round-image imgSizeBy100">
+    </ion-item>
+    <ion-item>
+      <h2 text-center text-capitalize>{{user?.displayName}}</h2>
+
+    </ion-item>
+    <ion-item no-lines text-center>
+
+      <button ion-button clear (click)="signOut()" >Logout</button>
+    </ion-item>
+
+  </ion-row>
+
+
+
+</ion-content>

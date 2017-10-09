@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>Videos ({{videos.pageInfo.totalResults}} found)</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <spinner *ngIf="promiseStatus==='pending'"></spinner>
+
+  <ion-card *ngFor="let video of videos.items">
+
+    <ion-item (click)="playVideo(video)">
+
+      <h2>{{video.snippet.channelTitle}}</h2>
+      <p>{{video.snippet.publishedAt|date:'medium'}}</p>
+    </ion-item>
+
+    <img [src]="video.snippet.thumbnails.medium.url" (click)="playVideo(video)"/>
+<!--
+    <ion-card-content (click)="playVideo(video)">
+      <p>{{video.snippet.description|slice:0:100}}{{video.snippet.description.length>100 ? '...':''}} </p>
+    </ion-card-content>-->
+    <ion-row>
+
+
+      <ion-col>
+        <button *ngIf="favouriteVideosId.indexOf(video.contentDetails.videoId)===-1"
+                ion-button icon-left
+                clear
+                small
+                (click)="addVideoInFavourite(video)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Favourite</div>
+        </button>
+
+        <button  *ngIf="favouriteVideosId.indexOf(video.contentDetails.videoId)!==-1"
+                 ion-button icon-left color="danger"
+                 clear
+                 small
+                 (click)="removeVideoInFavourite(video,i)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Unfavourite</div>
+        </button>
+
+
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doScroll($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,27 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>ADD GENRE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-list>
+    <ion-item>
+      <ion-label color="primary" floating>Genre Name</ion-label>
+      <ion-input [(ngModel)]="genre.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Image URL</ion-label>
+      <ion-input [(ngModel)]="genre.thumbnailURL"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <button ion-button block (click)="createGenre(genre)">ADD</button>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

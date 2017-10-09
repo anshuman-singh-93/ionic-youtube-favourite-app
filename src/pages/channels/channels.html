@@ -1,0 +1,159 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>CHANNELS</ion-title>
+  </ion-navbar>
+
+    <ion-segment [(ngModel)]="segmentName" (ionChange)="segmentChanged()">
+      <ion-segment-button value="user">
+        Your's
+      </ion-segment-button>
+
+      <ion-segment-button value="official">
+        Official
+      </ion-segment-button>
+
+    </ion-segment>
+
+</ion-header>
+
+
+<ion-content>
+
+  <spinner *ngIf="promiseStatus==='pending'"></spinner>
+  <div [ngSwitch]="segmentName">
+    <div *ngSwitchCase="'user'">
+
+      <ion-list text-center *ngIf="!isAuthenticated">
+        <ion-list-header>You need to login first</ion-list-header>
+        <ion-item>
+          <button ion-button block (click)="goToLoginPage()">LOGIN</button>
+        </ion-item>
+        <ion-item-divider>OR</ion-item-divider>
+        <ion-list-header>You can view official channels</ion-list-header>
+
+      </ion-list>
+
+
+      <ion-list text-center *ngIf="isAuthenticated && promiseStatus==='resolved' && !nonOffcialYoutubeChannels.length">
+        <ion-list-header >
+          You have not added any channel
+        </ion-list-header>
+        <ion-item>
+          <button ion-button block (click)="goToAddChannelPage()">ADD NOW</button>
+        </ion-item>
+        <ion-item-divider>OR</ion-item-divider>
+        <ion-list-header>You can view official channels</ion-list-header>
+
+      </ion-list>
+      <ion-card *ngFor="let channel of nonOffcialYoutubeChannels;let i=index">
+
+        <ion-item (click)="goToVideosPage(channel)">
+
+          <h2 style="text-transform: capitalize">{{channel.snippet.title}}</h2>
+        </ion-item>
+
+        <img [src]="channel.snippet.thumbnails.medium.url" (click)="goToVideosPage(channel)"/>
+
+
+        <ion-row>
+          <ion-col>
+            <button *ngIf="favouriteChannelsId.indexOf(channel.id)===-1"
+                    ion-button icon-left
+                    clear
+                    small
+                    (click)="addChannelInFavourite(channel)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>Favourite</div>
+            </button>
+
+            <button  *ngIf="favouriteChannelsId.indexOf(channel.id)!==-1"
+                     ion-button icon-left color="danger"
+                     clear
+                     small
+                     (click)="removeChannelFromFavourite(channel,i)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>Unfavourite</div>
+            </button>
+
+
+          </ion-col>
+
+          <ion-col>
+            <button ion-button icon-left clear small (click)="removeChannel(channel,i,false)">
+              <ion-icon name="md-trash"></ion-icon>
+              <div>Delete</div>
+            </button>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-card>
+    </div>
+
+  </div>
+  <div [ngSwitch]="segmentName">
+    <div *ngSwitchCase="'official'">
+
+      <ion-list text-center *ngIf="promiseStatus==='resolved' && !youtubeChannels.length">
+        <ion-list-header >
+          No Offcial channel found.but you can add your own favourite channel
+        </ion-list-header>
+        <ion-item>
+          <button ion-button block (click)="goToAddChannelPage()">ADD NOW</button>
+        </ion-item>
+      </ion-list>
+
+
+      <ion-card *ngFor="let channel of youtubeChannels;let i=index">
+
+        <ion-item (click)="goToVideosPage(channel)">
+
+          <h2 style="text-transform: capitalize">{{channel.snippet.title}}</h2>
+          <p>{{channel.statistics.subscriberCount}} subscriber</p>
+
+        </ion-item>
+
+        <img [src]="channel.snippet.thumbnails.medium.url" (click)="goToVideosPage(channel)"/>
+
+
+        <ion-row>
+          <ion-col>
+            <button *ngIf="favouriteChannelsId.indexOf(channel.id)===-1"
+                    ion-button icon-left
+                    clear
+                    small
+                    (click)="addChannelInFavourite(channel)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>Favourite</div>
+            </button>
+
+            <button  *ngIf="favouriteChannelsId.indexOf(channel.id)!==-1"
+                     ion-button icon-left color="danger"
+                     clear
+                     small
+                     (click)="removeChannelFromFavourite(channel,i)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>Unfavourite</div>
+            </button>
+
+
+          </ion-col>
+          <ion-col *ngIf="isAdmin">
+            <button ion-button icon-left clear small (click)="removeChannel(channel,i,true)">
+              <ion-icon name="md-trash"></ion-icon>
+              <div>Delete</div>
+            </button>
+          </ion-col>
+
+
+        </ion-row>
+
+      </ion-card>
+    </div>
+
+  </div>
+
+
+</ion-content>

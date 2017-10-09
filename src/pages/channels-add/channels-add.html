@@ -1,0 +1,67 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>ADD CHANNEL</ion-title>
+
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-searchbar
+    [(ngModel)]="searchValue"
+    [showCancelButton]="shouldShowCancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
+
+  <ion-card *ngFor="let channel of youtubeChannel.items">
+
+    <ion-item >
+
+      <h2 style="text-transform: capitalize">{{channel.snippet.title}}</h2>
+    </ion-item>
+
+    <img [src]="channel.snippet.thumbnails.medium.url" />
+
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="addChannelToGenre(channel)">
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>ADD</div>
+        </button>
+      </ion-col>
+
+
+    </ion-row>
+
+  </ion-card>
+
+<!--  <ion-list>
+    <ion-item-divider>
+      {{genre.name}}
+    </ion-item-divider>
+    <ion-item>
+      <ion-label color="primary" floating>Channel Name</ion-label>
+      <ion-input [(ngModel)]="channel.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="primary" floating>Youtube ID</ion-label>
+      <ion-input [(ngModel)]="channel.channelId"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button block (click)="createChannel(channel)">CREATE</button>
+    </ion-item>
+
+  </ion-list>-->
+
+
+  <ion-infinite-scroll (ionInfinite)="doScroll($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

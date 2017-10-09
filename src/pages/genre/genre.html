@@ -1,0 +1,46 @@
+
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>GENRE</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <spinner *ngIf="promiseStatus==='pending'"></spinner>
+  <ion-fab bottom right >
+    <button ion-fab color="primary"(click)="goToAddGenrePage()"><ion-icon name="md-add-circle"></ion-icon></button>
+
+
+  </ion-fab>
+  <ion-card *ngFor="let genre of listOfGenre;let i=index">
+
+    <ion-item (click)="goToPlaylistPage(genre)">
+
+      <h2 text-center style="text-transform: uppercase"><b>{{genre.name}}</b></h2>
+    </ion-item>
+
+    <img [src]="genre.thumbnailURL" (click)="goToPlaylistPage(genre)"/>
+
+
+    <ion-row *ngIf="isAuthenticated">
+      <ion-col *ngIf="isAdmin">
+        <button ion-button icon-left clear small (click)="deleteGenre(genre,i)">
+          <ion-icon name="md-trash"></ion-icon>
+          <div>Remove</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small (click)="goToChannelPage(genre)">
+          <ion-icon name="md-add-circle"></ion-icon>
+          <div>Add Channel</div>
+        </button>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

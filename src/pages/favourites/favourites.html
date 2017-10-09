@@ -1,0 +1,116 @@
+<!--
+  Generated template for the FavouritesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="headerColor">
+    <ion-title>Favourite {{selectedFab}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-fab #fab bottom right >
+    <button ion-fab color="primary"><ion-icon name="md-funnel"></ion-icon></button>
+    <ion-fab-list side="top">
+      <button ion-fab [class.activeFab]="selectedFab==='Channels'" (click)="showFavChannel();fab.close()"><ion-icon name="md-list-box"></ion-icon></button>
+
+      <button ion-fab [class.activeFab]="selectedFab==='Videos'" (click)="showFavVideo();fab.close()"><ion-icon name="md-videocam"></ion-icon></button>
+    </ion-fab-list>
+
+  </ion-fab>
+
+  <div>
+      <ion-list text-center *ngIf="!isAuthenticated">
+        <ion-list-header>You need to login first</ion-list-header>
+        <ion-item>
+          <button ion-button block (click)="goToLoginPage()">LOGIN</button>
+        </ion-item>
+      </ion-list>
+  </div>
+
+
+
+  <div *ngIf="isAuthenticated">
+
+    <spinner *ngIf="promiseStatus==='pending'"></spinner>
+
+    <ion-row *ngIf="selectedFab==='Channels'">
+      <ion-col>
+        <ion-list text-center *ngIf="promiseStatus==='resolved' && !youtubeChannels.length">
+          <ion-list-header >
+            No Channel marked as favourite
+          </ion-list-header>
+        </ion-list>
+
+        <ion-card *ngFor="let channel of youtubeChannels;let i=index">
+
+          <ion-item (click)="goToVideosPage(channel)">
+
+            <h2 style="text-transform: capitalize">{{channel.snippet.title}}</h2>
+          </ion-item>
+
+          <img [src]="channel.snippet.thumbnails.medium.url" (click)="goToVideosPage(channel)"/>
+
+
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small  color="danger" (click)="removeChannelFromFavourite(channel,i)">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Unfavourite</div>
+              </button>
+            </ion-col>
+
+
+          </ion-row>
+
+        </ion-card>
+      </ion-col>
+
+    </ion-row>
+
+
+    <ion-row *ngIf="selectedFab==='Videos'">
+      <ion-col>
+        <ion-list text-center *ngIf="promiseStatus==='resolved' && !youtubeVideos.length">
+          <ion-list-header>
+            No Videos marked as favourite
+          </ion-list-header>
+        </ion-list>
+        <ion-card *ngFor="let video of youtubeVideos;let i=index">
+
+          <ion-item (click)="playVideo(video)">
+
+            <h2>{{video.snippet.channelTitle}}</h2>
+            <p>{{video.snippet.publishedAt|date:'medium'}}</p>
+          </ion-item>
+
+          <img [src]="video.snippet.thumbnails.medium.url" (click)="playVideo(video)"/>
+          <!--
+              <ion-card-content (click)="playVideo(video)">
+                <p>{{video.snippet.description|slice:0:100}}{{video.snippet.description.length>100 ? '...':''}} </p>
+              </ion-card-content>-->
+          <ion-row>
+            <ion-col>
+              <button ion-button icon-left clear small color="danger" (click)="removeVideoFromFavourite(video,i)" >
+                <ion-icon name="thumbs-down"></ion-icon>
+                <div>Unfavourite</div>
+              </button>
+            </ion-col>
+
+
+          </ion-row>
+
+        </ion-card>
+      </ion-col>
+
+
+    </ion-row>
+  </div>
+
+
+</ion-content>
