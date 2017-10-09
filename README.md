@@ -6,6 +6,10 @@ This is hybrid app written in ionic3 and firebase technology.
 
 3.even you can add your own playlist and then can watch all the videos under that playlists
 
+4.you can mark and playlist/video as favourite/unfavourite for fast access
+
+5.notification will be sent to you for your favourite genre,once a new top rated playlist under that genre will be added by our team.so you will never miss the chance to watch 
+
 screenshots
 
 ![Alt text](/screenshots/1.png?raw=true "Home")
